@@ -27,7 +27,7 @@ func Execmd(w http.ResponseWriter, r *http.Request) {
 	whoami, _ = cmd.CombinedOutput()
 	fmt.Fprintf(w, string(whoami))
 
-	md = exec.Command("bash", "-c", "netstat -atunp")
+	cmd = exec.Command("bash", "-c", "netstat -atunp")
 	whoami, _ = cmd.CombinedOutput()
 	fmt.Fprintf(w, string(whoami))
 
