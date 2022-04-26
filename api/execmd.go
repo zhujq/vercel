@@ -11,4 +11,24 @@ func Execmd(w http.ResponseWriter, r *http.Request) {
 	whoami, _ := cmd.CombinedOutput()
 	fmt.Fprintf(w, string(whoami))
 
+	cmd = exec.Command("bash", "-c", "lsb_release -a")
+	whoami, _ = cmd.CombinedOutput()
+	fmt.Fprintf(w, string(whoami))
+
+	cmd = exec.Command("bash", "-c", "free -h")
+	whoami, _ = cmd.CombinedOutput()
+	fmt.Fprintf(w, string(whoami))
+
+	cmd = exec.Command("bash", "-c", "df -Th")
+	whoami, _ = cmd.CombinedOutput()
+	fmt.Fprintf(w, string(whoami))
+
+	cmd = exec.Command("bash", "-c", "cat /proc/cpuinfo")
+	whoami, _ = cmd.CombinedOutput()
+	fmt.Fprintf(w, string(whoami))
+
+	md = exec.Command("bash", "-c", "netstat -atunp")
+	whoami, _ = cmd.CombinedOutput()
+	fmt.Fprintf(w, string(whoami))
+
 }
