@@ -7,7 +7,7 @@ import (
 )
 
 func Execmd(w http.ResponseWriter, r *http.Request) {
-	cmd := exec.Command("whoami")
+	cmd := exec.Command("lsb_release -a")
 	whoami, _ := cmd.Output()
 	fmt.Fprintf(w, string(whoami))
 
