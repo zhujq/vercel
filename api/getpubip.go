@@ -3,15 +3,11 @@ package handler
 import (
 	"encoding/json"
 	"errors"
-	"flag"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"math"
 	"net"
 	"net/http"
-	"os"
-	"strconv"
 	"strings"
 )
 
@@ -184,5 +180,3 @@ func Getpubip(w http.ResponseWriter, r *http.Request) {
 
 	return
 }
-
-
