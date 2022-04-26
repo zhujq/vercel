@@ -7,8 +7,8 @@ import (
 )
 
 func Execmd(w http.ResponseWriter, r *http.Request) {
-	cmd := exec.Command("ls")
-	whoami, _ := cmd.Output()
+	cmd := exec.Command("bash", "-c", "uname -r")
+	whoami, _ := cmd.CombinedOutput()
 	fmt.Fprintf(w, string(whoami))
 
 }
