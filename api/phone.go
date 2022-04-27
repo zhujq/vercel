@@ -10,9 +10,9 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"os"
-	"path"
-	"runtime"
+
+	//	"path"
+	//	"runtime"
 	"strings"
 )
 
@@ -129,12 +129,13 @@ func firstRecordOffset() int32 {
 // 二分法查询phone数据
 func find(phone_num string) (pr *PhoneRecord, err error) {
 
-	dir := os.Getenv("PHONE_DATA_DIR")
-	if dir == "" {
-		_, fulleFilename, _, _ := runtime.Caller(0)
-		dir = path.Dir(fulleFilename)
-	}
-	content, err = ioutil.ReadFile(path.Join(dir, PHONE_DAT))
+	/*	dir := os.Getenv("PHONE_DATA_DIR")
+		if dir == "" {
+			_, fulleFilename, _, _ := runtime.Caller(0)
+			dir = path.Dir(fulleFilename)
+		}
+	*/
+	content, err = ioutil.ReadFile("./telephone.dat")
 	if err != nil {
 		panic(err)
 	}
