@@ -7,7 +7,7 @@ import (
 	"os"
 	"net/http"
 	"strings"
-	"github.com/zhujq/phonedata"
+	"github.com/xluohome/phonedata"
 )
 
 type ResBody struct {
