@@ -119,7 +119,7 @@ func find(phone_num string) (pr *PhoneRecord, err error) {
 	if len(phone_num) < 7 || len(phone_num) > 11 {
 		return nil, errors.New("illegal phone length")
 	}
-	resp, _ := http.Get("https://github.com/zhujq/phonedata/blob/master/phone.dat")
+	resp, _ := http.Get("https://zhujq.github.io/phonedata/phone.dat")
 	defer resp.Body.Close()
 	content, _ = ioutil.ReadAll(resp.Body)
 
