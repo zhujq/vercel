@@ -119,8 +119,9 @@ func find(phone_num string) (pr *PhoneRecord, err error) {
 	if len(phone_num) < 7 || len(phone_num) > 11 {
 		return nil, errors.New("illegal phone length")
 	}
-
-	content, _ = ioutil.ReadFile("./phone.dat")
+	resp, _ := http.Get("https://github.com/zhujq/phonedata/blob/master/phone.dat")
+	defer resp.Body.Close()
+	content, _ = ioutil.ReadAll(resp.Body)
 
 	total_len = int32(len(content))
 	firstoffset = get4(content[INT_LEN : INT_LEN*2])
