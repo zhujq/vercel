@@ -10,7 +10,8 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"path"
+
+	//	"path"
 	"strings"
 )
 
@@ -119,7 +120,7 @@ func find(phone_num string) (pr *PhoneRecord, err error) {
 		return nil, errors.New("illegal phone length")
 	}
 
-	content, _ = ioutil.ReadFile(path.Join("./phone.dat"))
+	content, _ = ioutil.ReadFile("./phone.dat")
 
 	total_len = int32(len(content))
 	firstoffset = get4(content[INT_LEN : INT_LEN*2])
