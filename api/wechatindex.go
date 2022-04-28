@@ -13,7 +13,7 @@ import (
 	//	"database/sql"
 )
 
-type ResBody struct {
+type indexResBody struct {
 	Status      string `json:"status"`
 	Mediatype   string `json:"mediatype"`
 	Mediaid     string `json:"mediaid"`
@@ -24,7 +24,7 @@ type ResBody struct {
 }
 
 func writefailed(w http.ResponseWriter, r *http.Request) {
-	var m = ResBody{
+	var m = indexResBody{
 		Status:      "failed",
 		Mediatype:   "",
 		Mediaid:     "",
@@ -44,7 +44,7 @@ func Getindex(w http.ResponseWriter, r *http.Request) {
 	querytype := "default"
 	log.Println(keyword)
 
-	var message = ResBody{
+	var message = indexResBody{
 		Status:      "failed",
 		Mediatype:   "",
 		Mediaid:     "",
