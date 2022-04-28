@@ -398,7 +398,7 @@ func PostJson(uri string, obj interface{}) ([]byte, error) {
 
 func Procrequest(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
-	if r.Method == "GET" && r.URL.Path == "/healthck" { //负载均衡器的定期健康检查
+	if r.Method == "GET" && r.URL.Path == "/api/mywechat/healthck" { //负载均衡器的定期健康检查
 		w.Header().Set("Content-Type", "text/html")
 		log.Println("Get Health check,replying")
 		w.WriteHeader(http.StatusOK)
