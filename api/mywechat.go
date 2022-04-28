@@ -396,7 +396,7 @@ func PostJson(uri string, obj interface{}) ([]byte, error) {
 	return ioutil.ReadAll(resp.Body)
 }
 
-func procRequest(w http.ResponseWriter, r *http.Request) {
+func Procrequest(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	if r.Method == "GET" && r.URL.Path == "/healthck" { //负载均衡器的定期健康检查
 		w.Header().Set("Content-Type", "text/html")
