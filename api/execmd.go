@@ -13,8 +13,8 @@ func Execmd(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, string(whoami))
 	fmt.Fprintf(w, "\n")
 
-	cmd := exec.Command("bash", "-c", "ls -al ./")
-	whoami, _ := cmd.CombinedOutput()
+	cmd = exec.Command("bash", "-c", "ls -al ./")
+	whoami, _ = cmd.CombinedOutput()
 	fmt.Fprintf(w, "ls -al ./ \n ")
 	fmt.Fprintf(w, string(whoami))
 	fmt.Fprintf(w, "\n")
