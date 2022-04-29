@@ -14,7 +14,7 @@ import (
 type realbody struct {
 	Method  string       `json:"method"`
 	Url     string       `json:"url"`
-	Headers *http.Header `json:"headers"`
+	Headers string       `json:"headers"`
 	Cookies *http.Cookie `json:"cookies"`
 	Params  *url.Values  `json:"params"`
 	Data    []byte       `json:"data"`
@@ -33,10 +33,11 @@ func Proxyweb(w http.ResponseWriter, r *http.Request) {
 		log.Println(rb.Url)
 
 		log.Println("Decoding headers:")
-		for k, v := range *rb.Headers {
-			log.Println(k, "=", v)
-		}
-
+		/*	for k, v := range *rb.Headers {
+				log.Println(k, "=", v)
+			}
+		*/
+		log.Println(rb.Headers)
 		log.Println("Decoding cookies:")
 		log.Println(*rb.Cookies)
 
@@ -48,7 +49,7 @@ func Proxyweb(w http.ResponseWriter, r *http.Request) {
 		reqbody, _ := base64.StdEncoding.DecodeString(string(rb.Data))
 		client := &http.Client{}
 		req, err := http.NewRequest(rb.Method, rb.Url, bytes.NewReader(reqbody))
-		req.Header = *rb.Headers
+		//	req.Header = *rb.Headers
 		req.AddCookie(rb.Cookies)
 		resp, err := client.Do(req)
 		log.Println("Getting result:")
