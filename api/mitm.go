@@ -23,7 +23,7 @@ type rspbody struct {
 	IsBase64Encoded bool
 	StatusCode      int
 	Headers         map[string]string
-	Data            []byte
+	Data            string
 }
 
 func Proxyweb(w http.ResponseWriter, r *http.Request) {
@@ -66,7 +66,7 @@ func Proxyweb(w http.ResponseWriter, r *http.Request) {
 		resp, err := client.Do(req)
 		log.Println("Getting result:")
 		log.Println(resp.Status)
-		log.Println(resp)
+		//	log.Println(resp)
 
 		rspcontent := rspbody{}
 
@@ -79,12 +79,13 @@ func Proxyweb(w http.ResponseWriter, r *http.Request) {
 		rsp := buff.Bytes()
 		dst := make([]byte, base64.StdEncoding.EncodedLen(len(rsp)))
 		base64.StdEncoding.Encode(dst, rsp)
-		log.Println(dst)
+		//	log.Println(dst)
 
 		rspcontent.IsBase64Encoded = false
 		rspcontent.StatusCode = 200
-		rspcontent.Data = append(rspcontent.Data, dst...)
-		log.Println(rspcontent)
+		rspcontent.Data = string(dst)
+		//	rspcontent.Data = append(rspcontent.Data, dst...)
+		//	log.Println(rspcontent)
 
 		//	buff2 := new(bytes.Buffer)
 		//	binary.Write(buff2, binary.BigEndian, rspcontent)
