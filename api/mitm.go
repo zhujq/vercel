@@ -79,7 +79,7 @@ func Proxyweb(w http.ResponseWriter, r *http.Request) {
 
 		rspcontent.IsBase64Encoded = false
 		rspcontent.StatusCode = 200
-		copy(rspcontent.Data, dst)
+		rspcontent.Data = append(rspcontent.Data, dst...)
 		log.Println(rspcontent)
 
 		buff2 := new(bytes.Buffer)
