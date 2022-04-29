@@ -73,13 +73,15 @@ func Proxyweb(w http.ResponseWriter, r *http.Request) {
 		buff := new(bytes.Buffer)
 		binary.Write(buff, binary.BigEndian, resp)
 		rsp := buff.Bytes()
-		//	dst := make([]byte, base64.StdEncoding.EncodedLen(len(rsp)))
-		base64.StdEncoding.Encode(rspcontent.Data, rsp)
+		dst := make([]byte, base64.StdEncoding.EncodedLen(len(rsp)))
+		base64.StdEncoding.Encode(dst, rsp)
+		log.Println(dst)
 
 		rspcontent.IsBase64Encoded = false
 		rspcontent.StatusCode = 200
-
+		copy(rspcontent.Data, dst)
 		log.Println(rspcontent)
+
 		buff2 := new(bytes.Buffer)
 		binary.Write(buff2, binary.BigEndian, rspcontent)
 
