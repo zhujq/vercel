@@ -22,7 +22,7 @@ func Proxyweb(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Println(err)
 		}
-		log.Println(rb.method)
+		log.Println(rb.Method)
 		fmt.Print(w, "hello")
 
 	}
