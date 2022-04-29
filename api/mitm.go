@@ -9,12 +9,8 @@ import (
 )
 
 type realbody struct {
-	method  string `json:"method"`
-	url     string `json:"url"`
-	headers string `json:"headers"`
-	cookies string `json:"cookies"`
-	params  string `json:"params"`
-	data    string `json:"data"`
+	method string `json:"method"`
+	url    string `json:"url"`
 }
 
 func Proxyweb(w http.ResponseWriter, r *http.Request) {
@@ -23,7 +19,7 @@ func Proxyweb(w http.ResponseWriter, r *http.Request) {
 		rbody, _ := ioutil.ReadAll(r.Body)
 		rb := realbody{}
 		json.Unmarshal([]byte(rbody), &rb)
-		log.Println(rb)
+		log.Println(rb.method)
 		fmt.Print(w, "hello")
 
 	}
