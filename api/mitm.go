@@ -3,7 +3,7 @@ package handler
 import (
 	"bytes"
 	"encoding/base64"
-	"encoding/binary"
+	"encoding/gob"
 	"encoding/json"
 	"io/ioutil"
 	"log"
@@ -70,8 +70,12 @@ func Proxyweb(w http.ResponseWriter, r *http.Request) {
 
 		rspcontent := rspbody{}
 
-		buff := new(bytes.Buffer)
-		binary.Write(buff, binary.BigEndian, resp)
+		//	buff := new(bytes.Buffer)
+		var buff bytes.Buffer
+		enc := gob.NewEncoder(&buff)
+		enc.Encode(resp)
+
+		//	binary.Write(buff, binary.BigEndian, resp)
 		rsp := buff.Bytes()
 		dst := make([]byte, base64.StdEncoding.EncodedLen(len(rsp)))
 		base64.StdEncoding.Encode(dst, rsp)
@@ -82,10 +86,11 @@ func Proxyweb(w http.ResponseWriter, r *http.Request) {
 		rspcontent.Data = append(rspcontent.Data, dst...)
 		log.Println(rspcontent)
 
-		buff2 := new(bytes.Buffer)
-		binary.Write(buff2, binary.BigEndian, rspcontent)
+		//	buff2 := new(bytes.Buffer)
+		//	binary.Write(buff2, binary.BigEndian, rspcontent)
+		enc.Encode(rspcontent)
 
-		w.Write(buff2.Bytes())
+		w.Write(buff.Bytes())
 
 	}
 
