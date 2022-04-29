@@ -11,9 +11,7 @@ import (
 	"strings"
 )
 
-const GetIpinfoUrl = "http://ip-api.com/json/"
-
-type ResIpinfoBody struct {
+type ResIpinfoBody2 struct {
 	Pubip      string `json:"pubip"`
 	Status     string `json:"status"`
 	Country    string `json:"country"`
@@ -23,7 +21,7 @@ type ResIpinfoBody struct {
 	As         string `json:"as"`
 }
 
-func HTTPGet(uri string) ([]byte, error) {
+func HTTPGet2(uri string) ([]byte, error) {
 	response, err := http.Get(uri)
 	if err != nil {
 		return nil, err
@@ -169,10 +167,10 @@ func Getpubip(w http.ResponseWriter, r *http.Request) {
 	if pubip == "" {
 		w.Write([]byte("I can't get your public ip!"))
 	} else {
-		var ipinfo ResIpinfoBody
+		var ipinfo ResIpinfoBody2
 		ipinfo.Pubip = pubip
 		ipinfo.Status = "fail"
-		buff, _ := HTTPGet(GetIpinfoUrl + pubip)
+		buff, _ := HTTPGet2("http://ip-api.com/json/" + pubip)
 		json.Unmarshal(buff, &ipinfo)
 		js, _ := json.Marshal(ipinfo)
 		w.Write(js)
