@@ -3,8 +3,8 @@ package handler
 import (
 	"bytes"
 	"encoding/base64"
+	"encoding/binary"
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -54,7 +54,12 @@ func Proxyweb(w http.ResponseWriter, r *http.Request) {
 		log.Println("Getting result:")
 		log.Println(resp.Status)
 		log.Println(resp.ContentLength)
-		fmt.Print(w, "hello")
+
+		buff := new(bytes.Buffer)
+		binary.Write(buff, binary.BigEndian, resp)
+
+		w.WriteHeader(200)
+		w.Write(buff.Bytes())
 
 	}
 
