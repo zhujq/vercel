@@ -1,6 +1,8 @@
 package handler
 
 import (
+	"bytes"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -15,6 +17,7 @@ type realbody struct {
 	Headers http.Header `json:"headers"`
 	Cookies http.Cookie `json:"cookies"`
 	Params  url.Values  `json:"params"`
+	Data    []byte      `json:"data"`
 }
 
 func Proxyweb(w http.ResponseWriter, r *http.Request) {
@@ -26,7 +29,31 @@ func Proxyweb(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Println(err)
 		}
-		log.Println(rb)
+		log.Println(rb.Method)
+		log.Println(rb.Url)
+
+		log.Println("Decoding headers:")
+		for k, v := range rb.Headers {
+			log.Println(k, "=", v)
+		}
+
+		log.Println("Decoding cookies:")
+		log.Println(rb.Cookies)
+
+		log.Println("Decoding url params:")
+		for k, v := range rb.Params {
+			log.Println(k, "=", v)
+		}
+
+		reqbody, _ := base64.StdEncoding.DecodeString(string(rb.Data))
+		client := &http.Client{}
+		req, err := http.NewRequest(rb.Method, rb.Url, bytes.NewReader(reqbody))
+		req.Header = rb.Headers
+		req.AddCookie(&rb.Cookies)
+		resp, err := client.Do(req)
+		log.Println("Getting result:")
+		log.Println(resp.Status)
+		log.Println(resp.ContentLength)
 		fmt.Print(w, "hello")
 
 	}
