@@ -6,14 +6,15 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"net/url"
 )
 
 type realbody struct {
-	Method  string `json:"method"`
-	Url     string `json:"url"`
-	Headers string `json:"headers"`
-	Cookies string `json:"cookies"`
-	Params  string `json:"params"`
+	Method  string      `json:"method"`
+	Url     string      `json:"url"`
+	Headers http.Header `json:"headers"`
+	Cookies http.Cookie `json:"cookies"`
+	Params  url.Values  `json:"params"`
 }
 
 func Proxyweb(w http.ResponseWriter, r *http.Request) {
