@@ -18,7 +18,10 @@ func Proxyweb(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		rbody, _ := ioutil.ReadAll(r.Body)
 		rb := realbody{}
-		json.Unmarshal([]byte(rbody), &rb)
+		err := json.Unmarshal([]byte(rbody), &rb)
+		if err != nil {
+			log.Println(err)
+		}
 		log.Println(rb.method)
 		fmt.Print(w, "hello")
 
