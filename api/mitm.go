@@ -9,12 +9,12 @@ import (
 )
 
 type realbody struct {
-	method string `json:"method"`
-	url    string `json:"url"`
+	Method string `json:"method"`
+	Url    string `json:"url"`
 }
 
 func Proxyweb(w http.ResponseWriter, r *http.Request) {
-	log.Println(r.Method)
+
 	if r.Method == "POST" {
 		rbody, _ := ioutil.ReadAll(r.Body)
 		rb := realbody{}
