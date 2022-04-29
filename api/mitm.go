@@ -8,16 +8,15 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"net/url"
 )
 
 type realbody struct {
-	Method  string       `json:"method"`
-	Url     string       `json:"url"`
-	Headers string       `json:"headers"`
-	Cookies *http.Cookie `json:"cookies"`
-	Params  *url.Values  `json:"params"`
-	Data    []byte       `json:"data"`
+	Method  string            `json:"method"`
+	Url     string            `json:"url"`
+	Headers map[string]string `json:"headers"`
+	Cookies map[string]string `json:"cookies"`
+	Params  map[string]string `json:"params"`
+	Data    []byte            `json:"data"`
 }
 
 func Proxyweb(w http.ResponseWriter, r *http.Request) {
@@ -39,22 +38,27 @@ func Proxyweb(w http.ResponseWriter, r *http.Request) {
 		*/
 		log.Println(rb.Headers)
 		log.Println("Decoding cookies:")
-		log.Println(*rb.Cookies)
+		log.Println(rb.Cookies)
 
 		log.Println("Decoding url params:")
-		for k, v := range *rb.Params {
-			log.Println(k, "=", v)
-		}
+		/*	for k, v := range rb.Params {
+				log.Println(k, "=", v)
+			}
+		*/
+		log.Println(rb.Params)
 
-		reqbody, _ := base64.StdEncoding.DecodeString(string(rb.Data))
+		reqbody := make([]byte, base64.StdEncoding.DecodedLen(len(rb.Data)))
+
+		n, _ := base64.StdEncoding.Decode(reqbody, rb.Data)
+		reqbody = reqbody[:n]
 		client := &http.Client{}
 		req, err := http.NewRequest(rb.Method, rb.Url, bytes.NewReader(reqbody))
 		//	req.Header = *rb.Headers
-		req.AddCookie(rb.Cookies)
+		//	req.AddCookie(rb.Cookies)
 		resp, err := client.Do(req)
 		log.Println("Getting result:")
 		log.Println(resp.Status)
-		log.Println(resp.ContentLength)
+		log.Println(resp)
 
 		buff := new(bytes.Buffer)
 		binary.Write(buff, binary.BigEndian, resp)
