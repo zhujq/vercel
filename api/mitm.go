@@ -26,6 +26,15 @@ type rspbody struct {
 	Data            string
 }
 
+func ToUtf8(to_decode string) string {
+	to_decode_buf := []byte(to_decode)
+	buf := make([]rune, len(to_decode_buf))
+	for i, b := range to_decode_buf {
+		buf[i] = rune(b)
+	}
+	return string(buf)
+}
+
 func Proxyweb(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method == "POST" {
@@ -82,9 +91,10 @@ func Proxyweb(w http.ResponseWriter, r *http.Request) {
 		//	binary.Write(buff, binary.BigEndian, resp)
 		rsp := buff.Bytes()
 		//	dst := make([]byte, base64.StdEncoding.EncodedLen(len(rsp)))
-		//	base64.StdEncoding.Encode(dst, rsp)
+		//	base64.StdEncoding.Encode(dst, rsp)                          //对返回的http响应的所有字节内容进行base64b编码，得到dst字节切片
 
 		dst := base64.StdEncoding.EncodeToString(rsp)
+		dst = ToUtf8(dst)
 		//	log.Println(dst)
 
 		//	rspcontent.IsBase64Encoded = false
