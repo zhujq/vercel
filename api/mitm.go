@@ -94,7 +94,7 @@ func Proxyweb(w http.ResponseWriter, r *http.Request) {
 		//	base64.StdEncoding.Encode(dst, rsp)                          //对返回的http响应的所有字节内容进行base64b编码，得到dst字节切片
 
 		dst := base64.StdEncoding.EncodeToString(rsp)
-		dst = ToUtf8(dst)
+		//	dst = ToUtf8(dst)
 		//	log.Println(dst)
 
 		//	rspcontent.IsBase64Encoded = false
