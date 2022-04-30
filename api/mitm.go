@@ -91,6 +91,8 @@ func Proxyweb(w http.ResponseWriter, r *http.Request) {
 		//	binary.Write(buff2, binary.BigEndian, rspcontent)
 		//	enc.Encode(rspcontent)
 
+		w.Header().Del("Accept-Encoding")
+
 		w.WriteHeader(http.StatusOK)
 
 		w.Write(dst)
