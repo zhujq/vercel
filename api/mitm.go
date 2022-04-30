@@ -93,7 +93,7 @@ func Proxyweb(w http.ResponseWriter, r *http.Request) {
 		//	dst := make([]byte, base64.StdEncoding.EncodedLen(len(rsp)))
 		//	base64.StdEncoding.Encode(dst, rsp)                          //对返回的http响应的所有字节内容进行base64b编码，得到dst字节切片
 
-		dst := base64.StdEncoding.EncodeToString(rsp)
+		//	dst := base64.StdEncoding.EncodeToString(rsp)
 		//	dst = ToUtf8(dst)
 		//	log.Println(dst)
 
@@ -111,7 +111,7 @@ func Proxyweb(w http.ResponseWriter, r *http.Request) {
 
 		w.WriteHeader(http.StatusOK)
 
-		w.Write([]byte(dst))
+		w.Write(rsp)
 
 	}
 
