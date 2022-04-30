@@ -29,6 +29,10 @@ type rspbody struct {
 func Proxyweb(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method == "POST" {
+
+		log.Println(r.Header.Get("content-type"))
+		log.Println(r.Header.Get("Content-Encoding"))
+
 		rbody, _ := ioutil.ReadAll(r.Body)
 		rb := realbody{}
 		err := json.Unmarshal([]byte(rbody), &rb)
@@ -66,7 +70,7 @@ func Proxyweb(w http.ResponseWriter, r *http.Request) {
 		resp, err := client.Do(req)
 		log.Println("Getting result:")
 		log.Println(resp.Status)
-		//	log.Println(resp)
+		log.Println(resp)
 
 		//	rspcontent := rspbody{}
 
@@ -95,8 +99,7 @@ func Proxyweb(w http.ResponseWriter, r *http.Request) {
 
 		w.WriteHeader(http.StatusOK)
 
-		w.Write(rsp)
-		//	w.Write(dst)
+		w.Write(dst)
 
 	}
 
