@@ -95,7 +95,8 @@ func Proxyweb(w http.ResponseWriter, r *http.Request) {
 
 		w.WriteHeader(http.StatusOK)
 
-		w.Write(dst)
+		w.Write(rsp)
+		//	w.Write(dst)
 
 	}
 
