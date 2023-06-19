@@ -88,7 +88,7 @@ func ClientIP(r *http.Request) string {
 func ClientPublicIP(r *http.Request) string {
 	var ip string
 
-	if ip = RemoteIP(r); !HasLocalIPAddr(ip) {
+	if ip = RemoteIP(r); ip != "" && !HasLocalIPAddr(ip) {
 		return ip
 	}
 
