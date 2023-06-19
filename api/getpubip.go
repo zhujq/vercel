@@ -88,7 +88,7 @@ func ClientIP(r *http.Request) string {
 func ClientPublicIP(r *http.Request) string {
 	var ip string
 
-	if ip = RemoteIP(r); ip != "" && !HasLocalIPAddr(ip) {
+	if ip = strings.TrimSpace(r.Header.Get("Cf-Connecting-Ip")); ip != "" && !HasLocalIPAddr(ip) {
 		return ip
 	}
 
@@ -102,7 +102,7 @@ func ClientPublicIP(r *http.Request) string {
 		return ip
 	}
 
-	if ip = strings.TrimSpace(r.Header.Get("Cf-Connecting-Ip")); ip != "" && !HasLocalIPAddr(ip) {
+	if ip = RemoteIP(r); ip != "" && !HasLocalIPAddr(ip) {
 		return ip
 	}
 
