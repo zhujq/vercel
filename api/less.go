@@ -1,3 +1,4 @@
+// vercel serverless function DOES NOT support websocket,it is just a test,not working
 package handler
 
 import (
