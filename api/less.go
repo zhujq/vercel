@@ -28,7 +28,7 @@ func BytesCombine(pBytes ...[]byte) []byte {
 	return buffer.Bytes()
 }
 
-func defHandler(w http.ResponseWriter, r *http.Request) {
+func Handler(w http.ResponseWriter, r *http.Request) {
 	ao := &websocket.AcceptOptions{InsecureSkipVerify: true}
 	conn, err := websocket.Accept(w, r, ao)
 	if err != nil {
