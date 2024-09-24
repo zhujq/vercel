@@ -5,7 +5,7 @@
       "dest": "/api/mywechat.go"
     }
   ],
-  "functions":{
+  "functions": {
     "api/bbb.go": {
       "maxDuration": 30 // This function can run for a maximum of 30 seconds
     }
