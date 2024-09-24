@@ -24,7 +24,7 @@ func ClientPublicIP(r *http.Request) string {
 		return ip
 	}
 
-	if ip = strings.TrimSpace(r.RemoteAddr); ip != "" {
+	if ip = RemoteIP(r); ip != "" {
 		return ip
 	}
 
