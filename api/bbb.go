@@ -1090,7 +1090,7 @@ div[class^="ele-leg-"]:before {
 		</head>
 		<body style="font-size:15px;font-family:Microsoft YaHei"><div style="width:1150px; height:auto; margin:0 auto;border: 1px dashed green;line-height:1.5em;"><p align="center"><font face="黑体 color="green" size="4">中兴XGW配置文件解析和UPF脚本转换服务</font></b></p>
 		  <p>&nbsp;&nbsp;&nbsp;&nbsp;本服务（Powered by 朱俊青-杭州处）用于接收中兴传统XGW(V4)设备的配置备份文件后进行解析返回APN主要信息或生成在UPF上的PCC/DPI部署脚本。服务提供者承诺不对上传的文件进行持久化记录，接收文件后将文件内容临时保存在内存中进行解析、返回结果后立即清理内存。</p>
-		  <hr><form action="./" method ="POST" onsubmit="return uploadprotect()" enctype="multipart/form-data">请选择待上传解析的中兴XGW配置备份文件:
+		  <hr><form action="./bbb" method ="POST" onsubmit="return uploadprotect()" enctype="multipart/form-data">请选择待上传解析的中兴XGW配置备份文件:
 		  <ul style="list-style-type: square;font-size:14px;margin:0;padding:0; list-style-position: inside;"><li>支持单套XGW配置文件的文本格式，支持单套或多套XGW配置文件压缩成一个<font color="#FF0000">7z(或zip)文件（<b>建议压缩上传</b>）</font></li></li></ul>
 		  如欲转换生成某APN在UPF的DPI/PCC部署脚本,请输入专用apn名称(如CMIOTGT.ZJ)或通用apn名称和业务编码列表(空格分隔,如cmiot 1221000630 1221000631)。
 		  <input type="text" name="targetapn" minlength="5" maxlength="200"  style="width:400px;height:20px;font-size:15px">
