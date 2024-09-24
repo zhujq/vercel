@@ -23,7 +23,7 @@ import (
 
 	"github.com/bitly/go-simplejson"
 	"github.com/enescakir/emoji"
-
+)
 
 const (
 	token = "wechat4go"
