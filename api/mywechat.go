@@ -1,4 +1,3 @@
-//vercel wechat后端版本，不连接redis数据库
 package handler
 
 import (
@@ -23,6 +22,7 @@ import (
 
 	"github.com/bitly/go-simplejson"
 	"github.com/enescakir/emoji"
+	"github.com/garyburd/redigo/redis"
 )
 
 const (
@@ -44,6 +44,12 @@ const GetHeadnewsUrl = "https://c.m.163.com/nc/article/headline/T1348647853363/0
 const CommMsg = "找不到什么东东回你了......"
 const GetEntocnUrl = "http://fanyi.youdao.com/translate?&doctype=json&type=AUTO&i="
 
+// const RedisDB = "wechat-redis:6379"
+// const RedisDB = "redis-12069.c1.us-east1-2.gce.cloud.redislabs.com:12069"
+// const RedisPWD ="Juju1234"
+var RedisDB, RedisPWD string
+
+//const RedisPWD ="bZbvrprPKsz7ttNxanwYGSDhMgNXQdfy"
 
 type TextRequestBody struct { //请求结构，需要解析xml后才能赋值给它
 	XMLName      xml.Name `xml:"xml"`
@@ -184,6 +190,20 @@ type MediaNewsinfo struct {
 	Url     string
 }
 
+/*
+func init() {                                         //初始，日志文件生成
+	file := "./" +"log"+ ".txt"
+	logFile, err := os.OpenFile(file, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0766)
+	if err != nil {
+			panic(err)
+	}
+	defer logFile.Close()
+	log.SetOutput(logFile) // 将文件设置为log输出的文件
+	log.SetPrefix("[wechat]")
+	log.SetFlags(log.LstdFlags | log.Lshortfile | log.LUTC)
+	return
+}
+日志输出到控制台*/
 
 func makeSignature(timestamp, nonce string) string {
 	sl := []string{token, timestamp, nonce}
@@ -413,7 +433,6 @@ func Procrequest(w http.ResponseWriter, r *http.Request) {
 
 	}
 
-	/*
 	RedisDB := os.Getenv("REDISHOST") + ":" + os.Getenv("REDISPORT")
 	RedisPWD := os.Getenv("REDISPASSWORD")
 
@@ -422,10 +441,10 @@ func Procrequest(w http.ResponseWriter, r *http.Request) {
 		log.Println("wechat Connect to redis error", err)
 	}
 	defer redisconn.Close()
-    */
+
 	if textRequestBody.Event == "unsubscribe" { //取消订阅事件处理
 
-	//	redisconn.Do("DEL", textRequestBody.FromUserName)
+		redisconn.Do("DEL", textRequestBody.FromUserName)
 		responseBody, _ = makeTextResponseBody(textRequestBody.ToUserName, textRequestBody.FromUserName, "")
 		w.Header().Set("Content-Type", "text/xml")
 		fmt.Fprintf(w, string(responseBody))
@@ -477,8 +496,8 @@ func Procrequest(w http.ResponseWriter, r *http.Request) {
 
 	//	fmt.Printf("Wechat Service: Recv text msg [%s] from user [%s]!",textRequestBody.Content,textRequestBody.FromUserName)
 
-	//_, err = redisconn.Do("lpush", textRequestBody.FromUserName, textRequestBody.Content) //记录用户输入的信息
-	/*
+	_, err = redisconn.Do("lpush", textRequestBody.FromUserName, textRequestBody.Content) //记录用户输入的信息
+
 	if err != nil { //有可能redis连接断了，重新连接
 		log.Println("wechat Error to connnect redis,re-connect....")
 
@@ -491,15 +510,14 @@ func Procrequest(w http.ResponseWriter, r *http.Request) {
 		//		defer redisconn.Close()
 
 	}
-	*/
-	//redisconn.Do("INCR", "keywordtimes:"+textRequestBody.Content) //统计用户输入信息的次数并放到有序集合中。
-	/*
+
+	redisconn.Do("INCR", "keywordtimes:"+textRequestBody.Content) //统计用户输入信息的次数并放到有序集合中。
 	var keytimes int64 = 0
 	keytimes, _ = redis.Int64(redisconn.Do("GET", "keywordtimes:"+textRequestBody.Content))
 	if keytimes > 0 {
 		redisconn.Do("ZADD", "keywordalltimes", keytimes, textRequestBody.Content)
 	}
-	*/
+
 	textRequestBody.Content = strings.TrimSpace(textRequestBody.Content) //去掉首尾空格
 
 	if strings.Contains(textRequestBody.Content, `/:`) && len(textRequestBody.Content) >= 4 { //接收到含表情符号时回填表情符号,表情符号可能为/: 或[]
@@ -562,7 +580,7 @@ func Procrequest(w http.ResponseWriter, r *http.Request) {
 
 				} else {
 					//这里增加keyword:用户输入内容为key值，value为返回的json数据的 集合sadd操作，可以作为一种容灾方式
-				//	redisconn.Do("SADD", ("keyword:" + textRequestBody.Content), string(buff))
+					redisconn.Do("SADD", ("keyword:" + textRequestBody.Content), string(buff))
 					err := json.Unmarshal(buff, &rsp)
 
 					if err != nil {
@@ -905,7 +923,7 @@ func Procrequest(w http.ResponseWriter, r *http.Request) {
 		return
 
 	}
-	/*
+
 	if strings.HasPrefix(textRequestBody.Content, "su:") { //管理功能，暂定以su:打头开始
 		msg := ""
 		switch textRequestBody.Content {
@@ -946,17 +964,15 @@ func Procrequest(w http.ResponseWriter, r *http.Request) {
 			msg = "不识别的管理指令，请检查你的输入。"
 
 		}
-
 		responseBody, _ = makeTextResponseBody(textRequestBody.ToUserName, textRequestBody.FromUserName, msg) //返回给微信服务器的响应必须一次发回
 		w.Header().Set("Content-Type", "text/xml")
 		fmt.Fprintf(w, string(responseBody))
 		return
 
 	}
-	*/
 
-	//matchedrst, err := redis.String(redisconn.Do("GET", textRequestBody.Content)) //查询是不是预定义的字符，如脏话、问好、查询时间等
-	/*
+	matchedrst, err := redis.String(redisconn.Do("GET", textRequestBody.Content)) //查询是不是预定义的字符，如脏话、问好、查询时间等
+
 	if err != nil && matchedrst != "" {
 		log.Println("Get redis error", err)
 
@@ -997,17 +1013,14 @@ func Procrequest(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, string(responseBody))
 		return
 	}
-	*/
+
 	if strings.Contains(textRequestBody.Content, "\n") { //换行符替换成空格
 
 		textRequestBody.Content = strings.Replace(textRequestBody.Content, "\n", " ", -1)
 
 	}
 
-	buff, _ := HTTPGet(GetIndexUrl + url.QueryEscape(textRequestBody.Content)) //需要把用户输入的关键字用html格式编码，否则空格等不能传递
-
-	json.Unmarshal(buff, &rsp)
-	/*
+	buff, err := HTTPGet(GetIndexUrl + url.QueryEscape(textRequestBody.Content)) //需要把用户输入的关键字用html格式编码，否则空格等不能传递
 	if err != nil {
 		log.Println("error:", err)
 		//看看本地redis有没有
@@ -1029,7 +1042,6 @@ func Procrequest(w http.ResponseWriter, r *http.Request) {
 			log.Println("error:", err)
 		}
 	}
-	*/
 
 	if rsp.Status == "success" {
 		switch rsp.Mediatype {
@@ -1065,7 +1077,11 @@ func Procrequest(w http.ResponseWriter, r *http.Request) {
 
 	} else { // 关键字查询失败(包括不能命中或者其他失败）时回复默认
 
-		responseBody, err = makeTextResponseBody(textRequestBody.ToUserName, textRequestBody.FromUserName, (emoji.Parse(":disappointed_face:") + CommMsg))
+		commreply, _ := redis.String(redisconn.Do("SRANDMEMBER", "commtoreply"))
+		if commreply == "" {
+			commreply = CommMsg
+		}
+		responseBody, err = makeTextResponseBody(textRequestBody.ToUserName, textRequestBody.FromUserName, (emoji.Parse(":disappointed_face:") + commreply))
 
 		//	log.Println(string(responseBody))
 
