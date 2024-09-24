@@ -12,6 +12,7 @@ import (
 	"net"
 	"net/http"
 	"net/url"
+	"os"
 	"sort"
 	"strconv"
 	"strings"
@@ -28,24 +29,24 @@ const (
 	token = "wechat4go"
 )
 
-//const GetTokenUrl = "http://token.zhujq.ga:8880/token?appid=wxf183d5e1fe4d5204"
-//const GetMaterialSum = "https://api.weixin.qq.com/cgi-bin/material/get_materialcount?access_token="
-//const GetMaterial = "https://api.weixin.qq.com/cgi-bin/material/batchget_material?access_token="
-//const GetMediainfo = "https://api.weixin.qq.com/cgi-bin/material/get_material?access_token="
+// const GetTokenUrl = "http://token.zhujq.ga:8880/token?appid=wxf183d5e1fe4d5204"
+// const GetMaterialSum = "https://api.weixin.qq.com/cgi-bin/material/get_materialcount?access_token="
+// const GetMaterial = "https://api.weixin.qq.com/cgi-bin/material/batchget_material?access_token="
+// const GetMediainfo = "https://api.weixin.qq.com/cgi-bin/material/get_material?access_token="
 const GetIndexUrl = "https://service-sandy.vercel.app/api/wechatindex?keyword="
 
-//const GetIndexUrl = "https://wechat-index-wechat-zhujq.cloud.okteto.net/?keyword=" 把index放在同一个docker中部署
+// const GetIndexUrl = "https://wechat-index-wechat-zhujq.cloud.okteto.net/?keyword=" 把index放在同一个docker中部署
 const WelcomeMsg = "谢谢您的关注！[微笑]\n      “一只猪一世界”个人公众号主要用来记录本人体验这大千世界的所见、所听、所想、所思，内容完善中，您可以输入 help 或 帮助 获得使用帮助，输入about me 或 关于我 获得本公众号的详细说明，也可以任意输入看看有没好玩的。\n       由于本公众号是个人性质的订阅号，腾讯公司只赋予非常有限的权限，只能进行你问我答式的消息回复，回复的内容是有且只有一条文本（或图片或视频或图文）。\n       特别说明：本公众号后端搭建涉及的所有硬件、软件以及公众号呈现的内容均与本人所供职的公司（Z公司）无关，也无任何涉及Z公司知识产权或商业机密的内容呈现!\n       Best Wishes!\n                                                Zhujq [猪头]"
 const GetIpinfoUrl = "http://ip-api.com/json/"
-const GetInntelnuminfoUrl = "https://phone.zhujq.ml/?phonenum="
+const GetInntelnuminfoUrl = "https://v.19790526.xyz/api/phonequery/?phonenum="
 const GetOuttelnuminfoUrl = "https://api.veriphone.io/v2/verify?key=0F0466BD7808436AB6F68930B8324802&phone="
 const GetHeadnewsUrl = "https://c.m.163.com/nc/article/headline/T1348647853363/0-10.html"
 const CommMsg = "找不到什么东东回你了......"
 const GetEntocnUrl = "http://fanyi.youdao.com/translate?&doctype=json&type=AUTO&i="
 
-//const RedisDB = "wechat-redis:6379"
-//const RedisDB = "redis-12069.c1.us-east1-2.gce.cloud.redislabs.com:12069"
-//const RedisPWD ="Juju1234"
+// const RedisDB = "wechat-redis:6379"
+// const RedisDB = "redis-12069.c1.us-east1-2.gce.cloud.redislabs.com:12069"
+// const RedisPWD ="Juju1234"
 var RedisDB, RedisPWD string
 
 //const RedisPWD ="bZbvrprPKsz7ttNxanwYGSDhMgNXQdfy"
@@ -342,7 +343,7 @@ func FilterEmoji(content string) string { //过滤字符串中的emoj
 	return new_content
 }
 
-//HTTPGet get 请求
+// HTTPGet get 请求
 func HTTPGet(uri string) ([]byte, error) {
 	response, err := http.Get(uri)
 	if err != nil {
@@ -360,7 +361,7 @@ func httpClient() *http.Client {
 	return &http.Client{}
 }
 
-//HTTPPost post 请求
+// HTTPPost post 请求
 func HTTPPost(uri string, data string) ([]byte, error) {
 	body := bytes.NewBuffer([]byte(data))
 	response, err := http.Post(uri, "", body)
@@ -375,7 +376,7 @@ func HTTPPost(uri string, data string) ([]byte, error) {
 	return ioutil.ReadAll(response.Body)
 }
 
-//PostJSON post json 数据请求
+// PostJSON post json 数据请求
 func PostJson(uri string, obj interface{}) ([]byte, error) {
 	buf := new(bytes.Buffer)
 	enc := json.NewEncoder(buf)
@@ -432,8 +433,8 @@ func Procrequest(w http.ResponseWriter, r *http.Request) {
 
 	}
 
-	RedisDB := "redis-12069.c1.us-east1-2.gce.cloud.redislabs.com:12069"
-	RedisPWD := "Juju1234"
+	RedisDB := os.Getenv("REDISHOST") + ":" + os.Getenv("REDISPORT")
+	RedisPWD := os.Getenv("REDISPASSWORD")
 
 	redisconn, err := redis.Dial("tcp", RedisDB, redis.DialKeepAlive(time.Hour*48), redis.DialPassword(RedisPWD)) //连接redis数据库，记录用户文本记录和预处理
 	if err != nil {

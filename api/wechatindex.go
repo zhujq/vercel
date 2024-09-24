@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"log"
+	"os"
 
 	//	"io"
 	"net/http"
@@ -59,7 +60,9 @@ func Getindex(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	Dbconn := "zhujq:Juju1234@tcp(wechat.zhujq.ga:3306)/wechat"
+	Dbconn := os.Getenv("MYSQLUSER") + ":" + os.Getenv("MYSQLPASSWORD") + "@tcp(" + os.Getenv("MYSQLHOST") + ":" + os.Getenv("MYSQLPORT") + ")/" + os.Getenv("MYSQLDATABASE")
+
+	//Dbconn := "zhujq:Juju1234@tcp(wechat.zhujq.ga:3306)/wechat"
 	Dbconn += "?tls=preferred" //2021-10-21 默认mysql ssl连接
 	db, err := sql.Open("mysql", Dbconn)
 
