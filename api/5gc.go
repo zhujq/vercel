@@ -1198,7 +1198,7 @@ func decodevnf(buf *bufio.Scanner) (*Dpiinfo, *Vnfinfo) {
 	return &dpiinfo, &vnfinfo
 }
 
-func procRequest(w http.ResponseWriter, r *http.Request) {
+func Procrequest(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET":
 		filepath := r.URL.Path
@@ -1739,5 +1739,3 @@ func procRequest(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
-
-
