@@ -3,19 +3,19 @@ package handler
 import (
 	"fmt"
 	"net/http"
+	"os"
+	"path/filepath"
 )
 
 func getExePath() string {
-    ex, err := os.Executable()
-    if err != nil {
-        panic(err)
-    }
-    exePath := filepath.Dir(ex)
-    fmt.Println("exePath:", exePath)
-    return exePath
+	ex, err := os.Executable()
+	if err != nil {
+		panic(err)
+	}
+	exePath := filepath.Dir(ex)
+	fmt.Println("exePath:", exePath)
+	return exePath
 }
-
-
 
 func DisplayHeadersHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Method: %s URL: %s Protocol: %s \n", r.Method, r.URL, r.Proto)
@@ -26,6 +26,6 @@ func DisplayHeadersHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Header field %q, Value %q\n", k, v)
 	}
 
-	fmt.Fprintf(w,"Exe Current Dir is:",getExePath())	
+	fmt.Fprintf(w, "Exe Current Dir is:", getExePath())
 
 }
