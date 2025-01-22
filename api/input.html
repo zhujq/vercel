@@ -1,0 +1,1460 @@
+<html>
+	<head><meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+	<title>中兴UPF配置MML反导文件服务</title>
+    <style id="INLINE_PEN_STYLESHEET_ID">
+    body {
+        background-color: #87B9F6;
+        overflow: hidden;
+    }
+    #peppa {
+        position: absolute;
+        top: 65%;
+        left: 15%;
+        width: 300px;
+        margin-left: -150px;
+        margin-top: -100px;
+        animation: pigMove 1000s infinite alternate;
+    }
+
+    @keyframes pigMove {
+        100% {
+            margin-left: 700px;
+        }
+    }
+
+
+    #peppa * {
+        position: absolute;
+    }
+    .dress {
+        top: 4px;
+        left: 14px;
+        width: 180px;
+        height: 154px;
+        background-color: #E9565E;
+        border: 8px solid #E3353F;
+        border-bottom: none;
+        -moz-border-radius: 50% 50% 50% 50% / 100% 100% 0% 0%;
+        -webkit-border-radius: 50% 50% 50% 50% / 100% 100% 0% 0%;
+        border-radius: 50% 50% 50% 50% / 100% 100% 0% 0%;
+        z-index: -2;
+    }
+    .bottom_of_dress_1, .bottom_of_dress_2 {
+        height: 2px;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        z-index: 6;
+    }
+    .bottom_of_dress_1 {
+        top: 168px;
+        left: 14px;
+        width: 194px;
+        background-color: #E3353F;
+        border-top: 5px solid #E3353F;
+    }
+    .bottom_of_dress_2 {
+        top: 162px;
+        left: 20px;
+        width: 183px;
+        background-color: #E9565E;
+        border-top: 5px solid #E9565E;
+    }
+    .left_of_dress, .right_of_dress {
+        top: 132px;
+        height: 40px;
+        width: 8px;
+        background-color: #E3353F;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        z-index: 5;
+    }
+    .left_of_dress {
+        left: 13px;
+        border-right: 3px solid #E9565E;
+        -ms-transform: rotate(9deg);
+        -webkit-transform: rotate(9deg);
+        transform: rotate(9deg);
+    }
+    .right_of_dress {
+        left: 199px;
+        border-left: 3px solid #E9565E;
+        -ms-transform: rotate(-6deg);
+        -webkit-transform: rotate(-6deg);
+        transform: rotate(-6deg);
+    }
+    .bottom_of_dress_3 {
+        top: 166px;
+        left: 12px;
+        height: 6px;
+        width: 198px;
+        background-color: #E3353F;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        z-index: 5;
+    }
+    .top_of_face {
+        top: -107px;
+        left: 40px;
+        height: 150px;
+        width: 147px;
+        background-color: #FFB0DF;
+        border: 7px solid #EB8DC2;
+        border-bottom-left-radius: 220px;
+        border-top-right-radius: 350px;
+        border-bottom-right-radius: 235px;
+        border-top-left-radius: 180px;
+        -ms-transform: rotate(18deg);
+        -webkit-transform: rotate(18deg);
+        transform: rotate(18deg);
+    }
+    .bottom_of_face_1, .bottom_of_face_2 {
+        top: -69px;
+        left: 31px;
+        height: 121px;
+        width: 149px;
+        background-color: #FFB0DF;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        -ms-transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+    .bottom_of_face_1 {
+        border: 7px solid #EB8DC2;
+        border-bottom: 7px solid transparent;
+        z-index: 2;
+    }
+    .bottom_of_face_2 {
+        border: 7px solid #EB8DC2;
+        border-bottom: 7px solid transparent;
+        z-index: 1;
+    }
+    .bottom_of_nose, .top_of_nose {
+        background-color: #FFB0DF;
+        -moz-border-radius: 50% 50% 50% 50% / 100% 100% 0% 0%;
+        -webkit-border-radius: 50% 50% 50% 50% / 100% 100% 0% 0%;
+        border-radius: 50% 50% 50% 50% / 100% 100% 0% 0%;
+    }
+    .bottom_of_nose {
+        top: -113px;
+        left: -11px;
+        width: 60px;
+        height: 76px;
+        border-left: 7px solid #EB8DC2;
+        border-top: 7px solid #EB8DC2;
+        -ms-transform: rotate(-70deg);
+        -webkit-transform: rotate(-70deg);
+        transform: rotate(-70deg);
+    }
+    .top_of_nose {
+        top: -149px;
+        left: 11px;
+        width: 68px;
+        height: 105px;
+        border-right: 7px solid #EB8DC2;
+        border-top: 6px solid #EB8DC2;
+        border-left: 2px solid transparent;
+        -ms-transform: rotate(-73deg);
+        -webkit-transform: rotate(-73deg);
+        transform: rotate(-73deg);
+    }
+    .eyes:before, .eyes:after {
+        position: absolute;
+        content: "";
+        background-color: #FDFDFD;
+        border: 5px solid #FDFDFD;
+        -moz-border-radius: 47%;
+        -webkit-border-radius: 47%;
+        border-radius: 47%;
+        z-index: 2;
+    }
+    .eyes:before {
+        top: -105px;
+        left: 65px;
+        width: 11px;
+        height: 12px;
+    }
+    .eyes:after {
+        top: -92px;
+        left: 107px;
+        width: 12px;
+        height: 13px;
+        -ms-transform: rotate(-20deg);
+        -webkit-transform: rotate(-20deg);
+        transform: rotate(-20deg);
+    }
+    .right_pupil, .left_pupil {
+        height: 11px;
+        width: 10px;
+        background-color: #000;
+        -moz-border-radius: 47%;
+        -webkit-border-radius: 47%;
+        border-radius: 47%;
+        -ms-transform: rotate(40deg);
+        -webkit-transform: rotate(40deg);
+        transform: rotate(40deg);
+        z-index: 3;
+    }
+    .left_pupil {
+        top: -99px;
+        left: 73px;
+    }
+    .right_pupil {
+        top: -85px;
+        left: 116px;
+    }
+    .center_of_nose {
+        top: -128px;
+        left: -16px;
+        height: 58px;
+        width: 42px;
+        background-color: #FFB0DF;
+        border: 7px solid #EB8DC2;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        -ms-transform: rotate(29deg);
+        -webkit-transform: rotate(29deg);
+        transform: rotate(29deg);
+        z-index: 3;
+    }
+    .center_of_nose:before, .center_of_nose:after {
+        position: absolute;
+        content: "";
+        width: 11px;
+        height: 12px;
+        background-color: #D667A9;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        -ms-transform: rotate(-39deg);
+        -webkit-transform: rotate(-39deg);
+        transform: rotate(-39deg);
+    }
+    .center_of_nose:before {
+        top: 24px;
+        left: 7px;
+    }
+    .center_of_nose:after {
+        top: 19px;
+        right: 8px;
+    }
+    .cheek {
+        top: -58px;
+        left: 121px;
+        width: 45px;
+        height: 50px;
+        background-color: #FF8CD1;
+        border: 11px solid #FFB0DF;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        -ms-transform: rotate(24deg);
+        -webkit-transform: rotate(24deg);
+        transform: rotate(24deg);
+        z-index: 3;
+    }
+    .right_eye_socket, .left_eye_socket {
+        width: 35px;
+        height: 35px;
+        background-color: #EB8DC2;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+    }
+    .right_eye_socket {
+        top: -98px;
+        left: 100px;
+        -ms-transform: rotate(-35deg);
+        -webkit-transform: rotate(-35deg);
+        transform: rotate(-35deg);
+        z-index: 2;
+    }
+    .left_eye_socket {
+        top: -112px;
+        left: 58px;
+        z-index: 1;
+    }
+    .left_ear, .right_ear {
+        height: 44px;
+        background-color: #FFB0DF;
+        border: 7px solid #EB8DC2;
+        -moz-border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        -webkit-border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        z-index: -1;
+    }
+    .left_ear {
+        top: -154px;
+        left: 108px;
+        width: 21px;
+        -ms-transform: rotate(190deg);
+        -webkit-transform: rotate(190deg);
+        transform: rotate(190deg);
+    }
+    .right_ear {
+        top: -132px;
+        left: 149px;
+        width: 23px;
+        -ms-transform: rotate(210deg);
+        -webkit-transform: rotate(210deg);
+        transform: rotate(210deg);
+    }
+    .bottom_left_of_left_ear, .bottom_right_of_left_ear, .bottom_left_of_right_ear, .bottom_right_of_right_ear {
+        width: 7px;
+        height: 10px;
+        background-color: #EB8DC2;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        z-index: 2;
+    }
+    .bottom_left_of_right_ear {
+        top: -98px;
+        left: 146px;
+        -ms-transform: rotate(10deg);
+        -webkit-transform: rotate(10deg);
+        transform: rotate(10deg);
+    }
+    .bottom_right_of_right_ear {
+        top: -87px;
+        left: 161px;
+        -ms-transform: rotate(25deg);
+        -webkit-transform: rotate(25deg);
+        transform: rotate(25deg);
+    }
+    .bottom_left_of_left_ear {
+        top: -114px;
+        left: 110px;
+        -ms-transform: rotate(10deg);
+        -webkit-transform: rotate(10deg);
+        transform: rotate(10deg);
+    }
+    .bottom_right_of_left_ear {
+        top: -109px;
+        left: 126px;
+        -ms-transform: rotate(25deg);
+        -webkit-transform: rotate(25deg);
+        transform: rotate(25deg);
+    }
+    .vertical_line_near_nose, .horizontal_line_near_nose {
+        width: 6px;
+        background-color: #EB8DC2;
+    }
+    .vertical_line_near_nose {
+        top: -40px;
+        left: 42px;
+        height: 10px;
+        -ms-transform: rotate(30deg);
+        -webkit-transform: rotate(30deg);
+        transform: rotate(30deg);
+        -moz-border-radius: 50px;
+        -webkit-border-radius: 50px;
+        border-radius: 50px;
+        z-index: 4;
+    }
+    .horizontal_line_near_nose {
+        top: -39px;
+        left: 44px;
+        height: 14px;
+        -ms-transform: rotate(98deg);
+        -webkit-transform: rotate(98deg);
+        transform: rotate(98deg);
+        -moz-border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+        -webkit-border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+        border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+        z-index: 3;
+    }
+    .part_of_nose {
+        top: -49px;
+        left: 44px;
+        width: 1px;
+        height: 1px;
+        background-color: #FFB0DF;
+        border: 9px solid #FFB0DF;
+        -moz-border-radius: 50px;
+        -webkit-border-radius: 50px;
+        border-radius: 50px;
+        z-index: 2;
+    }
+    .part_of_face_1, .part_of_face_2 {
+        background-color: transparent;
+        border-bottom: 4px solid #FFB0DF;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        z-index: 6;
+    }
+    .part_of_face_1 {
+        top: -34px;
+        left: 125px;
+        width: 85px;
+        height: 40px;
+        -ms-transform: rotate(-85.5deg);
+        -webkit-transform: rotate(-85.5deg);
+        transform: rotate(-85.5deg);
+    }
+    .part_of_face_2 {
+        top: -8px;
+        left: 150px;
+        width: 50px;
+        height: 20px;
+        -ms-transform: rotate(-75deg);
+        -webkit-transform: rotate(-75deg);
+        transform: rotate(-75deg);
+    }
+    .left_of_mouth, .right_of_mouth, .left_of_mouth_2, .right_of_mouth_2, .bottom_of_mouth, .top_of_mouth {
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        z-index: 2;
+    }
+    .left_of_mouth {
+        top: -54px;
+        left: 55px;
+        width: 64px;
+        height: 71px;
+        background-color: transparent;
+        border-bottom: 6px solid #D8468F;
+        border-left: 4px solid transparent;
+        border-right: 5px solid transparent;
+        -ms-transform: rotate(24deg);
+        -webkit-transform: rotate(24deg);
+        transform: rotate(24deg);
+    }
+    .right_of_mouth {
+        top: -61px;
+        left: 48px;
+        width: 80px;
+        height: 71px;
+        background-color: transparent;
+        border-bottom: 2px solid transparent;
+        border-right: 8px solid #D8468F;
+        border-top: 4px solid transparent;
+        -ms-transform: rotate(92deg);
+        -webkit-transform: rotate(92deg);
+        transform: rotate(92deg);
+    }
+    .left_of_mouth_2 {
+        top: -12px;
+        left: 56px;
+        width: 6px;
+        height: 14px;
+        background-color: #D8468F;
+        -ms-transform: rotate(-15deg);
+        -webkit-transform: rotate(-15deg);
+        transform: rotate(-15deg);
+    }
+    .right_of_mouth_2 {
+        top: -1px;
+        left: 117px;
+        width: 7px;
+        height: 9px;
+        background-color: #D8468F;
+        -ms-transform: rotate(30deg);
+        -webkit-transform: rotate(30deg);
+        transform: rotate(30deg);
+    }
+    .bottom_of_mouth {
+        top: -60px;
+        left: 49px;
+        width: 80px;
+        height: 71px;
+        background-color: transparent;
+        border-bottom: 2px solid transparent;
+        border-right: 8px solid #D8468F;
+        border-top: 4px solid transparent;
+        -ms-transform: rotate(88deg);
+        -webkit-transform: rotate(88deg);
+        transform: rotate(88deg);
+    }
+    .top_of_mouth {
+        top: -47px;
+        left: 59px;
+        width: 63px;
+        height: 63px;
+        background-color: #FFB0DF;
+    }
+    .left_hand, .right_hand {
+        top: 72px;
+        height: 10px;
+        background-color: #FDB6E0;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        border-bottom-right-radius: 50%;
+        border-bottom-left-radius: 50%;
+    }
+    .left_hand {
+        left: -29px;
+        width: 75px;
+        -ms-transform: rotate(156deg);
+        -webkit-transform: rotate(156deg);
+        transform: rotate(156deg);
+        z-index: -3;
+    }
+    .right_hand {
+        left: 180px;
+        width: 65px;
+        -ms-transform: rotate(204deg);
+        -webkit-transform: rotate(204deg);
+        transform: rotate(204deg);
+        z-index: 2;
+    }
+    .first_finger, .second_finger, .third_finger, .fourth_finger, .fifth_finger, .sixth_finger {
+        height: 8px;
+        background-color: #FDB6E0;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        z-index: 3;
+    }
+    .first_finger {
+        top: 75px;
+        left: -26px;
+        width: 22px;
+        border-top-left-radius: 50%;
+        border-top-right-radius: 35%;
+        -ms-transform: rotate(16deg);
+        -webkit-transform: rotate(16deg);
+        transform: rotate(16deg);
+    }
+    .third_finger {
+        top: 87px;
+        left: -17px;
+        width: 18px;
+        border-bottom-right-radius: 50%;
+        -ms-transform: rotate(105deg);
+        -webkit-transform: rotate(105deg);
+        transform: rotate(105deg);
+    }
+    .second_finger {
+        top: 86px;
+        left: -27px;
+        width: 18px;
+        border-bottom-right-radius: 50%;
+        -ms-transform: rotate(145deg);
+        -webkit-transform: rotate(145deg);
+        transform: rotate(145deg);
+    }
+    .fourth_finger {
+        top: 78px;
+        left: 230px;
+        width: 22px;
+        border-top-left-radius: 35%;
+        border-top-right-radius: 50%;
+        -ms-transform: rotate(-18deg);
+        -webkit-transform: rotate(-18deg);
+        transform: rotate(-18deg);
+    }
+    .sixth_finger {
+        top: 89px;
+        left: 224px;
+        width: 18px;
+        border-top-right-radius: 50%;
+        -ms-transform: rotate(75deg);
+        -webkit-transform: rotate(75deg);
+        transform: rotate(75deg);
+    }
+    .fifth_finger {
+        top: 88px;
+        left: 234px;
+        width: 18px;
+        border-bottom-right-radius: 50%;
+        border-bottom-left-radius: 50%;
+        -ms-transform: rotate(38deg);
+        -webkit-transform: rotate(38deg);
+        transform: rotate(38deg);
+    }
+    .left_of_tail, .right_of_tail {
+        width: 19px;
+        background-color: transparent;
+        border: 8px solid #FDB6E0;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        z-index: -3;
+    }
+    .left_of_tail {
+        top: 100px;
+        left: 194px;
+        height: 30px;
+        border-right: 7px solid transparent;
+        -ms-transform: rotate(-80deg);
+        -webkit-transform: rotate(-80deg);
+        transform: rotate(-80deg);
+    }
+    .right_of_tail {
+        top: 102px;
+        left: 215px;
+        height: 24px;
+        border-left: 7px solid transparent;
+        border-top: 9px solid transparent;
+        -ms-transform: rotate(80deg);
+        -webkit-transform: rotate(80deg);
+        transform: rotate(80deg);
+    }
+    .top_of_tail {
+        top: 111px;
+        left: 212px;
+        height: 8px;
+        width: 8px;
+        background-color: transparent;
+        border: 6px solid transparent;
+        border-top: 8px solid #FDB6E0;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        z-index: -3;
+    }
+    .bottom_of_tail {
+        top: 125px;
+        left: 240px;
+        width: 10px;
+        height: 8px;
+        background-color: #FDB6E0;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        -ms-transform: rotate(100deg);
+        -webkit-transform: rotate(100deg);
+        transform: rotate(100deg);
+        z-index: 2;
+    }
+    .left_leg, .right_leg {
+        top: 172px;
+        width: 10px;
+        height: 40px;
+        background-color: #FCB8E1;
+        -ms-transform: rotate(-1.5deg);
+        -webkit-transform: rotate(-1.5deg);
+        transform: rotate(-1.5deg);
+        z-index: -1;
+    }
+    .left_leg {
+        left: 72px;
+    }
+    .right_leg {
+        left: 156px;
+    }
+    .left_foot, .right_foot {
+        top: 185px;
+        width: 55px;
+        height: 55px;
+    }
+    .left_foot {
+        left: 32px;
+    }
+    .right_foot {
+        left: 116px;
+    }
+    .bottom_of_foot, .top_of_foot, .left_of_foot, .right_of_foot {
+        background-color: #000;
+    }
+    .bottom_of_foot {
+        top: 24px;
+        left: 8px;
+        width: 43px;
+        height: 7px;
+        border-bottom: 1px solid black;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        -ms-transform: rotate(-1deg);
+        -webkit-transform: rotate(-1deg);
+        transform: rotate(-1deg);
+    }
+    .top_of_foot {
+        top: 20px;
+        left: 11px;
+        width: 40px;
+        height: 5px;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        -ms-transform: rotate(6deg);
+        -webkit-transform: rotate(6deg);
+        transform: rotate(6.2deg);
+    }
+    .left_of_foot {
+        top: 18px;
+        left: 2px;
+        width: 22px;
+        height: 13px;
+        border-bottom: 1px solid black;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+    }
+    .right_of_foot {
+        top: 22px;
+        left: 44px;
+        width: 8px;
+        height: 8px;
+        border-bottom: 1px solid black;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+    }
+    .shadow {
+        top: 196px;
+        left: 3px;
+        width: 205px;
+        height: 31px;
+        background-color: #589454;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        z-index: -3;
+    }
+    #ground {
+        position: absolute;
+        margin: auto;
+        overflow: hidden;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+        height: 27%;
+        background-color: #77C76E;
+        -moz-border-radius: 50% 50% 50% 50% / 3% 9% 0% 0%;
+        -webkit-border-radius: 50% 50% 50% 50% / 3% 9% 0% 0%;
+        border-radius: 50% 50% 50% 50% / 3% 9% 0% 0%;
+        z-index: -4;
+    }
+    #ground * {
+        position: absolute;
+    }
+    .left_yellow_flower, .right_yellow_flower {
+        width: 50px;
+        height: 50px;
+    }
+    .left_yellow_flower {
+        top: 61px;
+        left: 881px;
+    }
+    .right_yellow_flower {
+        top: 12px;
+        left: 982px;
+    }
+    .top_right_yellow_petal, .bottom_right_yellow_petal, .bottom_left_yellow_petal, .top_left_yellow_petal {
+        width: 6px;
+        height: 10px;
+        background-color: #FBED04;
+        -moz-border-radius: 35%;
+        -webkit-border-radius: 35%;
+        border-radius: 35%;
+        z-index: -3;
+    }
+    .top_right_yellow_petal {
+        top: 11px;
+        left: 25px;
+        -ms-transform: rotate(35deg);
+        -webkit-transform: rotate(35deg);
+        transform: rotate(35deg);
+    }
+    .bottom_right_yellow_petal {
+        top: 18px;
+        left: 24px;
+        -ms-transform: rotate(125deg);
+        -webkit-transform: rotate(125deg);
+        transform: rotate(125deg);
+    }
+    .bottom_left_yellow_petal {
+        top: 18px;
+        left: 19px;
+        -ms-transform: rotate(225deg);
+        -webkit-transform: rotate(225deg);
+        transform: rotate(225deg);
+    }
+    .top_left_yellow_petal {
+        top: 11px;
+        left: 18px;
+        -ms-transform: rotate(315deg);
+        -webkit-transform: rotate(315deg);
+        transform: rotate(315deg);
+    }
+    .stalk_of_yellow_flower, .stalk_of_white_flower {
+        width: 6px;
+        height: 22px;
+        background-color: #56A14C;
+        -moz-border-radius: 6px;
+        -webkit-border-radius: 6px;
+        border-radius: 6px;
+        z-index: -3;
+    }
+    .stalk_of_yellow_flower {
+        top: 20px;
+        left: 21px;
+    }
+    .stalk_of_white_flower {
+        top: 26px;
+        left: 27px;
+    }
+    .left_clump_of_grass, .center_clump_of_grass, .right_clump_of_grass {
+        width: 60px;
+        height: 60px;
+    }
+    .left_clump_of_grass {
+        top: 32px;
+        left: 1082px;
+    }
+    .center_clump_of_grass {
+        top: 30px;
+        left: 493px;
+    }
+    .right_clump_of_grass {
+        top: 90px;
+        left: 344px;
+    }
+    .left_blade_of_grass, .center_blade_of_grass, .right_blade_of_grass {
+        top: 12px;
+        width: 6px;
+        background-color: #64AC56;
+        -moz-border-radius: 6px;
+        -webkit-border-radius: 6px;
+        border-radius: 6px;
+        z-index: -3;
+    }
+    .left_blade_of_grass {
+        left: 15px;
+        height: 14px;
+    }
+    .center_blade_of_grass {
+        left: 27px;
+        height: 14px;
+        -ms-transform: rotate(5deg);
+        -webkit-transform: rotate(5deg);
+        transform: rotate(5deg);
+    }
+    .right_blade_of_grass {
+        left: 37px;
+        height: 20px;
+        -ms-transform: rotate(10deg);
+        -webkit-transform: rotate(10deg);
+        transform: rotate(10deg);
+    }
+    .left_white_flower, .right_white_flower, .center_white_flower {
+        width: 60px;
+        height: 60px;
+    }
+    .left_white_flower {
+        top: 70px;
+        left: 65px;
+    }
+    .right_white_flower {
+        top: 30px;
+        left: 1275px;
+    }
+    .center_white_flower {
+        top: 30px;
+        left: 175px;
+    }
+    .top_right_white_petal, .bottom_right_white_petal, .bottom_left_white_petal, .top_left_white_petal {
+        width: 6px;
+        height: 8px;
+        background-color: #FDFFFE;
+        -moz-border-radius: 35%;
+        -webkit-border-radius: 35%;
+        border-radius: 35%;
+        z-index: -2;
+    }
+    .top_right_white_petal {
+        top: 9px;
+        left: 33px;
+        -ms-transform: rotate(35deg);
+        -webkit-transform: rotate(35deg);
+        transform: rotate(35deg);
+    }
+    .bottom_right_white_petal {
+        top: 22px;
+        left: 34px;
+        -ms-transform: rotate(125deg);
+        -webkit-transform: rotate(125deg);
+        transform: rotate(125deg);
+    }
+    .bottom_left_white_petal {
+        top: 22px;
+        left: 21px;
+        -ms-transform: rotate(225deg);
+        -webkit-transform: rotate(225deg);
+        transform: rotate(225deg);
+    }
+    .top_left_white_petal {
+        top: 10px;
+        left: 21px;
+        -ms-transform: rotate(315deg);
+        -webkit-transform: rotate(315deg);
+        transform: rotate(315deg);
+    }
+    .center_of_white_flower {
+        top: 14px;
+        left: 24px;
+        width: 13px;
+        height: 13px;
+        background-color: #FFED07;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        z-index: -3;
+    }
+
+    fieldset {
+    
+        border: 1px solid ;
+        border-top-color: #000;
+    }
+ 
+
+	legend {
+     /* animation: marginMove 40s infinite alternate; */
+        
+        padding: 2px;
+        color:#000000
+    }
+ 
+    @keyframes marginMove {
+        100% {
+            margin-left: 300px;
+        }
+    }
+
+   
+
+    #pig {
+        height:20em; width:20em;
+        margin:5em auto; 
+        border-radius:50%;
+        box-shadow:0 0.125em 1em #fca inset, 0 -1.5em 5em #923 inset;
+        background:radial-gradient(50% 30%, #fa9 20%,#f46 100%);
+        animation: float ease-in-out 1.5s infinite;
+        position: absolute;
+        top: 45%;
+        left: 87%;  
+        margin-left: -150px;
+        margin-top: -100px;
+    }
+#pig:before{
+  animation: shadow ease-in-out 1.5s infinite;
+  content:'';
+  display:block;
+  position:relative;
+  top:10em;
+  height:.5em;
+  margin:0 2em;
+  border-radius:80% 60%;
+  box-shadow:0 14em 1em 1em rgba(0,0,0,.7);
+  background:rgba(0,0,0,0);
+  opacity: .5;
+}
+.ear {
+  height:8em; width:5em;
+  position:absolute; top:2em;
+  background:radial-gradient(50% 30%, #923 20%,#612 100%);
+}
+.ear.left{
+  left:-1em;
+  border-radius:250% 50% 250% 20%;
+    box-shadow:0.125em 0.125em 0.5em rgba(90,0,0,0.25), 0 -0.0625em 0.25em rgba(0,0,0,0.5) inset;
+}
+.ear.right{
+  right:-1em;
+  border-radius:50% 250% 20% 250%;
+  box-shadow:-0.125em 0.125em 0.5em rgba(90,0,0,0.25), 0 -0.0625em 0.25em rgba(0,0,0,0.5) inset;
+}
+.eye{
+  height:7em; width:3.5em;
+  position:absolute; top:5em;
+  box-shadow:0 -1em 1em rgba(0,0,100,0.15) inset,0 -0.25em 0.25em rgba(0,0,100,0.2) inset, 0 0.125em 0.75em rgba(90,0,0,0.2), 0 0.25em 1em rgba(90,0,0,0.3  );
+	background:#fff;
+}
+.eye.left{
+	left:28%;
+  border-radius:100% 50%;
+}
+.eye.right{
+	right:28%;
+  border-radius:50% 100%;
+}
+.eye:after{
+  height:3em; width:2em;
+  position:absolute; top:1em;
+  border-radius:100%;
+  box-shadow:0 -0.25em 0.5em #111 inset;
+	content:'';
+  background:#333;
+}
+.eye.left:after{ left:35%; }
+.eye.right:after{ right:35%; }
+.nose { 
+  height:4em; width:6em;
+  position:absolute; top:60%; left:36%;
+  border-radius:80% 80% 70% 70%;
+  box-shadow:0 0.25em 1em rgba(90,0,0,0.5), 0 -0.0625em #fff;
+	background:radial-gradient(50% 30%, #fca 20%,#fa9 100%);
+}
+.nose:before, .nose:after {
+  height:2em; width:0.5em;
+  position:absolute; top:1em;
+  border-radius:100%;
+  box-shadow:0 0.0625em #fff,0 0 0.5em rgba(90,0,0,0.5);
+	content:'';
+  background:#612;
+}
+	.nose:before { left:1.75em; }
+	.nose:after { right:1.75em; }
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(1em);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes shadow {
+  0% {
+    transform: translateY(0);
+    opacity: .5;
+  }
+  50% {
+    transform: translateY(1em) scale(.9);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: .5;
+  }
+}
+   
+
+.shui{
+    width:  250px;
+    height: 330px;
+    position: absolute;
+    top:  20%;
+    left: 8%;
+    transform: translate(-50%,-50%);
+         
+    box-sizing: border-box;
+            /* 设置弯曲 */
+    border-radius: 30% 70% 70% 30% / 30% 35% 65% 70%;
+            /* 设置box-shadow :水平方向阴影  垂直方向阴影  模糊距离  阴影尺寸  阴影颜色  内/外阴影(inset/outset(默认)) 
+            盒子阴影可以有多组值,之间用逗号隔开
+            水平阴影和垂直阴影必须写,其余4个是可选的*/
+    box-shadow: inset 10px 20px 30px rgba(0, 0, 0, 0.5), 10px 10px 20px rgba(0, 0, 0, 0.3), 15px 15px 30px rgba(0, 0, 0, 0.05), 
+    inset -10px -10px 15px rgba(255, 255, 254, 0.83);
+            /*使用关键帧  watermove  9s播放  匀速 无限循环*/
+    animation: watermove 9s linear infinite;
+    }
+        /* 伪元素选择器:在^之后插入 */
+    .shui::after{
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.82);
+            border-radius: 50%;
+            left: 60px;
+            top: 80px;
+            /*使用关键帧  watermove  4s播放  匀速 无限循环*/
+            animation: watermove 4s linear infinite;
+        }
+        /* 伪元素选择器:在当前盒子最前插入一个东西 */
+        .shui::before{
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.82);
+            border-radius: 50%;
+            left: 120px;
+            top: 55px;
+            /*使用关键帧  watermove  4s播放  匀速 无限循环*/
+            animation: watermove 4s linear infinite;
+        }
+        /* 关键帧 */
+        @keyframes watermove{  
+            20%{
+                border-radius: 30% 70% 53% 47% / 28% 44% 56% 72%;
+            }
+           
+            40%{
+                border-radius: 30% 70% 39% 61% / 34% 39% 61% 66%;
+            }
+           
+            60%{
+                border-radius: 25% 75% 45% 55% / 40% 55% 45% 60%;
+            }
+           
+            80%{
+                border-radius: 28% 72% 31% 69% / 32% 39% 61% 68%;
+            }
+        }
+
+        
+.app{
+    width:  250px;
+    height: 100px;
+    position: absolute;
+    top:  5%;
+    left: 85%;
+  display: flex;
+  justify-content: left;
+  align-items: left;
+}
+.font25{
+  position: relative;
+  font-size: 18px;
+  font-weight: 600;
+  color:white;
+  letter-spacing: 6px;
+  background-color: #87B9F6;
+}
+.font25:after{
+  content: "";
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  background-color: inherit;
+  animation: text-ani25 10s linear infinite;
+  animation-delay: 5s;
+}
+@keyframes text-ani25{
+  0%{
+    content: "$-7";
+    left: 0;
+  }
+  5%{
+    content: ";yp";
+    left: 0;
+  }
+  10%{
+    content: "*&#H";
+    left: 0;
+  }
+  15%{
+    content: "-!);";
+    left: 0;
+  }
+  20%{
+    content: "#$_}-'";
+    left: 0;
+  }
+  25%{
+    content: ":0^!$.";
+    left: 0;
+  }
+  30%{
+    content: "#{+.-?#u";
+    left: 0;
+  }
+  35%{
+    content: "f7*%}-;#";
+    left: 0;
+  }
+  40%{
+    content: "对比只选两台设备哦";
+    left: 0;
+  }
+  43%{
+    content: "对比只选两台设备哦";
+    left: 0;
+  }
+  45%{
+    content: "*$!+0^&!`^-";
+    left: 0;
+  }
+  50%{
+    content: "&-?>-=|`";
+    left: 0;
+  }
+  52%{
+    content: "文件压缩上传更快哦";
+    left: 0;
+  }
+  55%{
+    content: "u<|:#-";
+    left: auto;
+    right: 0;
+  }
+  60%{
+    content: ";~0![,";
+    left: auto;
+    right: 0;
+  }
+  65%{
+    content: ")+->";
+    left: auto;
+    right: 0;
+  }
+  70%{
+    content: "+.=d";
+    left: auto;
+    right: 0;
+  }
+  75%{
+    content: "&%";
+    left: auto;
+    right: 0;
+  }
+  78%{
+    content: "文件压缩上传更快哦";
+    left: 0;
+  }
+  80%{
+    content: "`@";
+    left: auto;
+    right: 0;
+  }
+  85%{
+    content: "-";
+    left: auto;
+    right: 0;
+  }
+  88%{
+    content: "对比只选两台设备哦";
+    left: 0;
+  }
+  90%{
+    content: "#";
+    left: auto;
+    right: 0;
+  }
+  95%{
+    content: "";
+    left: 0;
+  }
+  100%{
+    content: "";
+    left: 0;
+  }
+}
+
+
+       </style>
+    </head>
+    <body style="font-size:16px;font-family:Microsoft YaHei">
+        <div style="width:1050px; height:auto; margin:0 auto;border: 0px dashed green;line-height:1.5;">
+            <center><font face="黑体" color="DarkGreen" size="6">中兴UPF配置MML反导文件解析、挑错和对比服务</font></center>
+        &nbsp;&nbsp;&nbsp;&nbsp;本服务（Powered by 朱俊青-杭州处）用于接收中兴UPF设备的配置MML反导文件后进行解析、挑错、对比并返回结果。服务提供者承诺不对上传的文件进行持久化记录，接收文件后将文件内容临时保存在内存中进行解析、返回结果后立即清理内存。
+        <ul style="list-style-type: square;font-size:14px;margin:0;padding:0; list-style-position: inside;">
+            <li>支持单套UPF配置文件的文本格式，支持单套或多套UPF配置文件压缩成一个<font color="#FF0000">7z(或zip)文件（<b>建议压缩上传</b>）</font></li>
+            <li>服务模式为挑错时，请选择<font color="#FF0000"><b>仅2套</b></font>UPF的配置MML文件压缩成一个文件</li> 
+        </ul>
+        <form action="./" method ="POST" onsubmit="return uploadprotect()" enctype="multipart/form-data">
+            <fieldset>
+            <legend><b>请选择服务模式和待上传的文件：</b></legend>
+             <table>
+                <tr>
+              <td><input type="radio" id="cc1" name="mode" value="decode" checked/>
+              <label for="cc1">解析模式：对上传的一个或多个UPF的配置文件解析后返回主要的配置信息<br> </label>
+        
+              <input type="radio" id="cc2" name="mode" value="find" />
+              <label for="cc2">挑错模式：分析上传的一个或多个UPF的配置文件后返回可能存在错误的配置项&nbsp;&nbsp;&nbsp;&nbsp;<br></label>
+        
+              <input type="radio" id="cc3" name="mode" value="compare" />
+              <label for="cc3">对比模式：对上传的2套UPF的配置数据进行对比后返回对比结果  </label></td>
+        
+        <td>
+        <center><input type="file" name="file" style="width:400px;height:30px;font-size: 20px;background-color:yellow;" accept=".7z,.zip,.txt,.log"></center>
+        <center><button type="submit"  id="b1" style="width:400px;height:50px;font-size: 30px;color: #00FF00;background-color: #000000;cursor:pointer;box-shadow:5px 2px 5px black;">上传并帮我处理吧，猪</button></center>
+        </td>
+    </tr>   
+    </table>
+    </fieldset>
+        </form>
+       
+        </div>
+        <script>
+
+            function uploadprotect()
+            {
+              if (document.querySelector("input[type=file]").files.length ==0 )
+              {
+                  alert("请选择一套或多套UP的F配置MML文件或压缩文件");
+                  return false
+              }else
+              {
+                    document.getElementById("b1").disabled=true;
+                     document.getElementById("b1").innerHTML= "文件上传中，请耐心等待..";
+                  return true;
+              }
+            }
+
+            
+            </script>
+         
+
+            <div id="peppa">
+
+                <!-- The head -->
+                <div class="top_of_face"></div>
+                <div class="bottom_of_face_1"></div>
+                <div class="bottom_of_face_2"></div>
+                <div class="part_of_face_1"></div>
+                <div class="part_of_face_2"></div>
+        
+                <!-- The ears -->
+                <div class="left_ear"></div>
+                <div class="bottom_left_of_left_ear"></div>
+                <div class="bottom_right_of_left_ear"></div>
+                <div class="right_ear"></div>
+                <div class="bottom_left_of_right_ear"></div>
+                <div class="bottom_right_of_right_ear"></div>
+        
+                <!-- The eyes -->
+                <div class="left_eye_socket"></div>
+                <div class="right_eye_socket"></div>
+                <div class="left_pupil"></div>
+                <div class="right_pupil"></div>
+                <div class="eyes"></div>
+        
+                <!-- The nose -->
+                <div class="center_of_nose"></div>
+                <div class="vertical_line_near_nose"></div>
+                <div class="horizontal_line_near_nose"></div>
+                <div class="part_of_nose"></div>
+                <div class="bottom_of_nose"></div>
+                <div class="top_of_nose"></div>
+        
+                <!-- The mouth -->
+                <div class="left_of_mouth"></div>
+                <div class="right_of_mouth"></div>
+                <div class="left_of_mouth_2"></div>
+                <div class="right_of_mouth_2"></div>
+                <div class="bottom_of_mouth"></div>
+                <div class="top_of_mouth"></div>
+        
+                <!-- The cheek -->
+                <div class="cheek"></div>
+        
+                <!-- The dress -->
+                <div class="dress"></div>
+                <div class="bottom_of_dress_1"></div>
+                <div class="bottom_of_dress_2"></div>
+                <div class="left_of_dress"></div>
+                <div class="right_of_dress"></div>
+                <div class="bottom_of_dress_3"></div>
+        
+                <!-- The hands -->
+                <div class="left_hand"></div>
+                <div class="first_finger"></div>
+                <div class="third_finger"></div>
+                <div class="second_finger"></div>
+                <div class="fifth_finger"></div>
+                <div class="right_hand"></div>
+                <div class="fourth_finger"></div>
+                <div class="sixth_finger"></div>
+        
+                <!-- The legs -->
+                <div class="left_leg"></div>
+                <div class="left_foot">
+                    <div class="bottom_of_foot"></div>
+                    <div class="top_of_foot"></div>
+                    <div class="left_of_foot"></div>
+                    <div class="right_of_foot"></div>
+                </div>
+                <div class="right_leg"></div>
+                <div class="right_foot">
+                    <div class="bottom_of_foot"></div>
+                    <div class="top_of_foot"></div>
+                    <div class="left_of_foot"></div>
+                    <div class="right_of_foot"></div>
+                </div>
+        
+                <!-- The tail -->
+                <div class="left_of_tail"></div>
+                <div class="right_of_tail"></div>
+                <div class="top_of_tail"></div>
+                <div class="bottom_of_tail"></div>
+        
+                <!-- The shadow of Peppa Pig -->
+                <div class="shadow"></div>
+            </div>
+        
+            <!-- The ground -->
+            <div id="ground">
+        
+                <!-- The yellow flowers -->
+                <div class="left_yellow_flower">
+                    <div class="stalk_of_yellow_flower"></div>
+                    <div class="top_right_yellow_petal"></div>
+                    <div class="bottom_right_yellow_petal"></div>
+                    <div class="bottom_left_yellow_petal"></div>
+                    <div class="top_left_yellow_petal"></div>
+                </div>
+                <div class="right_yellow_flower">
+                    <div class="stalk_of_yellow_flower"></div>
+                    <div class="top_right_yellow_petal"></div>
+                    <div class="bottom_right_yellow_petal"></div>
+                    <div class="bottom_left_yellow_petal"></div>
+                    <div class="top_left_yellow_petal"></div>
+                </div>
+        
+                <!-- The grass -->
+                <div class="left_clump_of_grass">
+                    <div class="left_blade_of_grass"></div>
+                    <div class="center_blade_of_grass"></div>
+                    <div class="right_blade_of_grass"></div>
+                </div>
+                <div class="center_clump_of_grass">
+                    <div class="left_blade_of_grass"></div>
+                    <div class="center_blade_of_grass"></div>
+                    <div class="right_blade_of_grass"></div>
+                </div>
+                <div class="right_clump_of_grass">
+                    <div class="left_blade_of_grass"></div>
+                    <div class="center_blade_of_grass"></div>
+                    <div class="right_blade_of_grass"></div>
+                </div>
+        
+                <!-- The white flowers -->
+                <div class="left_white_flower">
+                    <div class="stalk_of_white_flower"></div>
+                    <div class="top_right_white_petal"></div>
+                    <div class="bottom_right_white_petal"></div>
+                    <div class="bottom_left_white_petal"></div>
+                    <div class="top_left_white_petal"></div>
+                    <div class="center_of_white_flower"></div>
+                </div>
+                <div class="right_white_flower">
+                    <div class="stalk_of_white_flower"></div>
+                    <div class="top_right_white_petal"></div>
+                    <div class="bottom_right_white_petal"></div>
+                    <div class="bottom_left_white_petal"></div>
+                    <div class="top_left_white_petal"></div>
+                    <div class="center_of_white_flower"></div>
+                </div>
+                <div class="center_white_flower">
+                    <div class="stalk_of_white_flower"></div>
+                    <div class="top_right_white_petal"></div>
+                    <div class="bottom_right_white_petal"></div>
+                    <div class="bottom_left_white_petal"></div>
+                    <div class="top_left_white_petal"></div>
+                    <div class="center_of_white_flower"></div>
+                </div>
+            </div>
+
+            <div id="pig">
+                <div class="ear right"></div>
+                <div class="ear left"></div>
+                <div class="eye right"></div>
+                <div class="eye left"></div>
+                <div class="nose"></div>
+              </div>
+
+              <div class="shui"></div>
+
+              <div class="app">
+                <div class="font25">文件压缩上传更快哦</div>
+              </div>
+
+
+</body></html>
